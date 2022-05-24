@@ -1,6 +1,7 @@
 // Puppeteer
-const browserObject = require('./browser');
-const scraperController = require('./pageController');
+const browserObject = require('./src/scraping/browser')
+const scraperController = require('./src/scraping/pageController');
+
 // Sequelize
 const initModels = require("./src/models/init-models.js");
 const { Sequelize } = require('sequelize');
