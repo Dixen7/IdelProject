@@ -1,7 +1,5 @@
-const pageScraper = require('./scripts_sites/pageScraper');
-
-let sitesToScrap = ["stethonet_org.js"]
-
+let scriptToUse = ["stethonet_org.js"]
+const pageScraper = '/scripts_sites/' + scriptToUse.map(e =>  {return e});
 
 async function scrapeAll(browserInstance){
 	let browser;

@@ -5,7 +5,7 @@ const scraperObject = {
     async scraper(browser){
 
         let page = await browser.newPage();
-        
+
 		console.log(`Navigating to ${this.url}...`);
 
 		// Navigate to the selected page
