@@ -1,17 +1,25 @@
-let scriptToUse = ["stethonet_org.js"]
-const pageScraper = '/scripts_sites/' + scriptToUse.map(e =>  {return e});
+let scriptToUse = [
+	"stethonet_org.js",
+	"ide-liberal_com.js",
+	"annonces-medicales_com.js",
+	"calendridel_fr.js",
+	"ordre-infirmiers_fr.js",
+	"remplacement-ide-liberal_fr.js"
+]
+
+let script = __dirname + '\\scripts_sites\\' + scriptToUse.map(e =>  {return e});
+const pageScraper = require(script);
+
 
 async function scrapeAll(browserInstance){
 	let browser;
-	try{
+
+	try {
 		browser = await browserInstance;
-
-		// transformer cette ligne de facon a fouiller dans les scripts specifique 
 		await pageScraper.scraper(browser);	
-
 		console.log("Scraper() -> Url: " + pageScraper.url);
-		
-	}
+	} 
+
 	catch(err){
 		console.log("Could not resolve the browser instance => ", err);
 	}

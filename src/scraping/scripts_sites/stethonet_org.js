@@ -28,11 +28,8 @@ const scraperObject = {
         })
     
         console.log(result)
-    
         await page.close();
 
-    }
-    
+    } 
 }
-
 module.exports = scraperObject;
