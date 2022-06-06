@@ -1,10 +1,10 @@
 let scriptToUse = [
-	"stethonet_org.js",
+	// "stethonet_org.js",
 	"ide-liberal_com.js",
-	"annonces-medicales_com.js",
-	"calendridel_fr.js",
-	"ordre-infirmiers_fr.js",
-	"remplacement-ide-liberal_fr.js"
+	// "annonces-medicales_com.js",
+	// "calendridel_fr.js",
+	// "ordre-infirmiers_fr.js",
+	// "remplacement-ide-liberal_fr.js"
 ]
 
 let script = __dirname + '\\scripts_sites\\' + scriptToUse.map(e =>  {return e});

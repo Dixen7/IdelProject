@@ -8,27 +8,32 @@ const scraperObject = {
 
 		console.log(`Navigating to ${this.url}...`);
 
-		// Navigate to the selected page
-
         await page.goto(this.url, {waitUntil: "networkidle2"})
 
-        let result = await page.evaluate(() => {
-            return Array.from(document.querySelectorAll("#fondnews"))
-            .map(offer => {
+
+        let response = async function scrapSite() {
+
+            let missions = await page.evaluate(() => {
+                return Array.from(document.querySelectorAll("#fondnews"))
+                .map(missionText => {
     
-                let missionsDescription = "";
-                const missions = offer;
+                    let mission = {};
     
-                if (missions) {
-                    missionsDescription = missions.innerText.trim().replace("\n", " ");
-                }
-    
-                return { missions : missionsDescription };
-            });
-        })
-    
-        console.log(result)
+                    if (missionText) {
+                        mission.description = missionText.innerText.trim().replace("\n", " ");
+                        mission.location = missionText.previousElementSibling.innerText.trim().split(' ')[2];
+                    }
+                    
+                    return mission;
+                });
+            })
+
+            console.log(missions)
+        }
+
+        await response();
         await page.close();
+        await browser.close();
 
     } 
 }
