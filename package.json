@@ -19,6 +19,7 @@
   "homepage": "https://github.com/Dixen7/IdelProject#readme",
   "dependencies": {
     "dotenv": "^16.0.1",
+    "fs": "0.0.1-security",
     "mysql2": "^2.3.3",
     "puppeteer": "^14.1.1",
     "sequelize": "^6.20.1",
