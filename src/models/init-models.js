@@ -9,7 +9,8 @@ function initModels(sequelize) {
 
   return {
     user,
-    mission
+    mission,
+    sequelize
   };
 }
 
