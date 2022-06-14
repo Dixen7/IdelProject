@@ -16,7 +16,7 @@ async function scrapeAll(browserInstance){
 
 	try {
 		browser = await browserInstance;
-		await pageScraper.scraper(browser);	
+		await pageScraper.scraper(browser);
 		console.log("Scraper() -> Url: " + pageScraper.url);
 	} 
 

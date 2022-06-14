@@ -13,17 +13,15 @@ const scraperObject = {
             let missions = await page.evaluate(() => {
                 return Array.from(document.querySelectorAll("#fondnews"))
                 .map(missionText => {
-    
                     let mission = {};
-    
                     if (missionText) {
-                        mission.description = missionText.innerText ? mission.innerText.trim().replace("\n", " ") : "";
+                        mission.description = missionText && missionText.innerText ? missionText.innerText.trim().replace("\n", " ") : "";
                         mission.location = missionText.previousElementSibling.innerText ? missionText.previousElementSibling.innerText.trim().split(' ')[2]: "";
+                        mission.
                         mission.source_link = this.url;
-                        if (["remplacant", "remplacante", "remplacant(e)", "remplacement", "remplaçant(e)", "remplaçant", , "remplaçante"].some(el => missionText.innerText.toLowerCase().trim().includes(el))) {
+                        if (["remplacant", "remplacante", "remplacant(e)", "remplacement", "remplaçant(e)", "remplaçant", , "remplaçante"]
+                            .some(el => missionText.innerText.toLowerCase().includes(el))) {
                             mission.type = "remplacement";
-                        } else {
-                            mission.type = "";
                         }
                     }
                     return mission;
