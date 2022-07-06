@@ -8,16 +8,15 @@ const scraperObject = {
 		console.log(`Navigating to ${this.url}...`);
         await page.goto(this.url, {waitUntil: "networkidle2"})
 
-        let response = async function scrapSite() {
+        let scrapingData = async function scrapSite() {
 
-            let missions = await page.evaluate(() => {
+            let result = await page.evaluate(() => {
                 return Array.from(document.querySelectorAll("#fondnews"))
                 .map(missionText => {
 
                     let mission = {};
                     let return_creator_id = "";
                     let return_phone = "";
-                    let phoneId = ['01','02','03','04','05','06','07','08',]
 
                     if (missionText) {
 
@@ -27,23 +26,12 @@ const scraperObject = {
                         // Split description in array
                         const arrayDescription = descriptionInput.split(' ');
 
-
-
-                        // need to be fixed
-                        // User phone
+                        // phone
+                        const regexp = new RegExp(/^(?:(?:\+|00)33[\s.-]{0,3}(?:\(0\)[\s.-]{0,3})?|0)[1-9](?:(?:[\s.-]?\d{2}){4}|\d{2}(?:[\s.-]?\d{3}){2})$/,"g");
                         let phone = arrayDescription.find(
-                            (element) => !element.includes('/') && phoneId.some(e => element.includes(e))
+                            (element) => element.match(regexp)
                         );
-                        if (phone) {
-                            if (phone.replace(/[^0-9]/g, '').length !== 10 && phone.replace(/[^0-9]/g, '').length > 2) {
-                                return_phone = phone
-                                // NOUS AVONS PROBABLEMENT RECUPERE UNE DATE
-                            } else if (phone.replace(/[^0-9]/g, '').length !== 10 && phone.replace(/[^0-9]/g, '').length == 2){
-                                // TODO recup les element apres les espace pour concatener le num
-                            } else {
-                                return_phone = phone.replace(/[^0-9]/g, '');
-                            }
-                        }
+                        return_phone = phone ? phone.replace('.', '') : '';
 
                         // Publication date
                         mission.date = arrayDescription[0];
@@ -61,8 +49,8 @@ const scraperObject = {
 
                         // Mission mail
                         return_creator_id = arrayDescription.map(e => {
-                            return e.includes('@') ? e : null
-                        }).filter(el => el != null)[0];
+                            return e.includes('@') ? e : '';
+                        }).filter(el => el != '')[0];
 
                         // Mission URL source
                         mission.source_link = this.url;
@@ -81,9 +69,9 @@ const scraperObject = {
 
                 });
             })
-            console.log(missions)
+            console.log(result)
         }
-        await response();
+        await scrapingData();
         await browser.close();
     } 
 }
