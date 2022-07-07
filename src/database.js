@@ -1,5 +1,5 @@
 // Sequelize
-const initModels = require("./models/init-models.js");
+const initModels = require("./models/initModels.js");
 const { Sequelize } = require('sequelize');
 
 require('dotenv').config();
@@ -16,7 +16,6 @@ const sequelize = new Sequelize.Sequelize(process.env.MYSQL_DATABASE, process.en
     freezeTableName: true,
   },
   logging: (query, time) => {
-    // logger.info(time + 'ms' + ' ' + query + '\n');
     console.info(time + 'ms' + ' ' + query + '\n');
   },
   benchmark: true,
@@ -25,11 +24,9 @@ const sequelize = new Sequelize.Sequelize(process.env.MYSQL_DATABASE, process.en
 sequelize
   .authenticate()
   .then(() => {
-    // logger.info('🟢 The database is connected.');
     console.info('🟢 The database is connected.');
   })
   .catch((error) => {
-    // logger.error(`🔴 Unable to connect to the database: ${error}.`);
     console.info(`🔴 Unable to connect to the database: ${error}.`);
   });
 
