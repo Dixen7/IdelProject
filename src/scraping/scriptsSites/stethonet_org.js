@@ -55,18 +55,26 @@ const scraperObject = {
                         if (["remplacant", "remplacante", "remplacant(e)", "remplacement", "remplaçant(e)", "remplaçant", , "remplaçante"].some(el => missionText.innerText.toLowerCase().includes(el))) {
                             mission.type = "remplacement";
                         }
-
-                        user.mission = mission
                     }
-
-                    //TODO RETURN USER & MISSION
-                    return user
+                    return {
+                        user,
+                        mission
+                    }
                 });
             })
-            console.log(result)
+            return result
+        }
+    
+        let test = await scrapingData();
+
+        let array = [];
+
+        for (user of test) {
+            array.push(user)
         }
 
-        await scrapingData();
+        console.log(array)
+        
         await browser.close();
     } 
 }
