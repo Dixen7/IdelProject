@@ -16,5 +16,24 @@ class Mission {
         this.necessary_equipment = necessary_equipment;
     }
 
+    toJson() {
+        const { description, gender, location, type, start_date, end_date, retrocession, skills, working_days, need_vehicles, establishment_type, source_link, necessary_equipment } = this;
+        return {
+            description,
+            gender,
+            location,
+            type,
+            start_date,
+            end_date,
+            retrocession,
+            skills,
+            working_days,
+            need_vehicles,
+            establishment_type,
+            source_link,
+            necessary_equipment
+        };
+    }
+
 }
-export default AdditionalData;
+export default Mission;

@@ -1,7 +1,19 @@
-async function missionExist(mission, user) {
+const { DB } = require('../database');
+
+class MissionsService {
+    constructor() {
+        this.mission = DB.mission;
+    }
+
+    async missionExist(mission, user) {
+
+    }
+
+    async createMission(mission) {
+        const missionCreated = await this.mission.create({ ...mission });
+        return missionCreated;
+    }
 }
 
-async function createMission(mission) {
-}
-
-module.exports = { missionExist, createMission };
+module.exports = { MissionsService: new MissionsService() };
+module.exports.default = new MissionsService();
